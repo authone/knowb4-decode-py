@@ -1,7 +1,3 @@
-import getopt
-import pathlib
-import sys
-
 '''
 Options class to parse command line parameters:
             -h                      print this help and exit.   
@@ -9,9 +5,12 @@ Options class to parse command line parameters:
             --url url               knowb4 egress URL to parse
 '''
 
+import getopt
+import pathlib
+import sys
+
 class Options:
     def __init__(self):
-        self.workingDir = pathlib.Path('/tmp/etsi-plugtests/etl')
         self.printVersionAndExit = False
         self.url = None
 

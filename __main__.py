@@ -18,7 +18,9 @@ knowb4_decode_version = "0.0.1"
 # ############################################### ###############################################
 
 def check_preconditions(options):
-    if not options.workingDir.is_dir():
+    if options.url is None or options.url == "":
+        Logger.LogError("URL is not specified")
+        return False
         os.makedirs(options.workingDir)
     return True
 
@@ -28,16 +30,11 @@ def printVersion():
 
 
 # ############################################### ###############################################
-# This is the main entry point of the script
-# It initializes the options, checks preconditions, and processes the EUTL.
-# ############################################### ###############################################
 
 def print_decoded(knowb4):
     Logger.TerminalPrintBlue("================================================================================")
     if knowb4.domain != "links.eu1.defend.egress.com":
         Logger.LogWarning("Encoded URL is not a links.eu1.defend.egress.com URL")
-    # print(f"| Protocol: {knowb4.schema}")
-    # print(f"| Domain: {knowb4.domain}")
     Logger.TerminalPrintGreen(f"| Decoded URL: {knowb4.urlDecoded}")
     Logger.TerminalPrintBlue("================================================================================")
 
@@ -46,21 +43,19 @@ def open_in_browser(url):
     answer = input().lower()
     if answer == "y":
         import webbrowser
-        webbrowser.open(kb4decoder.urlDecoded)
+        webbrowser.open(url)
 
 def main(argv):
 
     options = Options()
-    options.workingDir = pathlib.Path("./.cache")
     options.parseCommandLine(argv)
 
     if options.printVersionAndExit:
         printVersion()
         sys.exit()
 
-    # if not check_preconditions(options):
-    #     Logger.LogError("Preconditions not satisfied, exiting")
-    #     return False
+    if not check_preconditions(options):
+        return False
 
     try:
         kb4decoder = KnowB4Decode(options)
