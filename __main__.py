@@ -62,7 +62,10 @@ def main(argv):
         if not kb4decoder.decode():
             Logger.LogError("Failed to decode the URL")
             return False
-        print_decoded(kb4decoder)
+        if options.textOutput:
+            print(kb4decoder.urlDecoded)
+        else:
+            print_decoded(kb4decoder)
         KnowB4Decode.AnalyzeURL(kb4decoder.urlDecoded)
 
         # open_in_browser(kb4decoder.urlDecoded)

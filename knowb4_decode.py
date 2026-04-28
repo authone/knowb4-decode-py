@@ -59,7 +59,7 @@ class KnowB4Decode:
         end = urlsplited.query.find("@OriginalLink", start)
         
         if start == -1 or end == -1:
-            Logger.LogError("Encoded URL is not a valid knowb4 URL")
+            Logger.LogError("Encoded URL is not a valid knowb4 URL: "+self.urlEncoded)
             return False
         
         base64_url = urlsplited.query[start + len("Base64Url="):end-1]
