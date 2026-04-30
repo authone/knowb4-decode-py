@@ -85,5 +85,3 @@ class KnowB4Decode:
         query = urlsplited.query
         if schema != "https":
             Logger.LogWarning("Decoded URL is not using HTTPS schema") 
-
-# printf "\x1f\x8b\x08\x00\x00\x00\x00\x00" |cat - application.bin.zip |gzip -dc
